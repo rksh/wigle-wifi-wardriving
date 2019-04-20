@@ -423,8 +423,7 @@ public class WifiReceiver extends BroadcastReceiver {
                 dbHelper.lastLocation( prevGpsLocation );
                 // MainActivity.info("set last location for lerping");
             }
-        }
-        else {
+        } else {
             dbHelper.recoverLocations( location );
         }
 
