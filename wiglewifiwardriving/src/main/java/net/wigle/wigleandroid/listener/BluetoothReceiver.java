@@ -46,6 +46,7 @@ import uk.co.alt236.bluetoothlelib.device.BluetoothLeDevice;
 import uk.co.alt236.bluetoothlelib.device.adrecord.AdRecord;
 import uk.co.alt236.bluetoothlelib.device.adrecord.AdRecordStore;
 
+import static android.location.LocationManager.GPS_PROVIDER;
 import static net.wigle.wigleandroid.MainActivity.DEBUG_BLUETOOTH_DATA;
 
 /**
@@ -54,6 +55,8 @@ import static net.wigle.wigleandroid.MainActivity.DEBUG_BLUETOOTH_DATA;
 public final class BluetoothReceiver extends BroadcastReceiver {
 
     private static final Map<Integer, String> DEVICE_TYPE_LEGEND;
+    private Location prevGpsLocation;
+
     //TODO: i18n
     static {
         Map<Integer, String> initMap = new HashMap<>();
@@ -158,10 +161,7 @@ public final class BluetoothReceiver extends BroadcastReceiver {
                     MainActivity.info("LE scanResult: " + scanResult + " callbackType: " + callbackType);
                     Location location = null;
                     if (gpsListener != null) {
-                        final long gpsTimeout = prefs.getLong(ListFragment.PREF_GPS_TIMEOUT, GPSListener.GPS_TIMEOUT_DEFAULT);
-                        final long netLocTimeout = prefs.getLong(ListFragment.PREF_NET_LOC_TIMEOUT, GPSListener.NET_LOC_TIMEOUT_DEFAULT);
-                        gpsListener.checkLocationOK(gpsTimeout, netLocTimeout);
-                        location = gpsListener.getLocation();
+                        location = gpsListener.checkGetLocation(prefs);
                     } else {
                         MainActivity.warn("Null gpsListener in LE Single Scan Result");
                     }
@@ -479,12 +479,9 @@ public final class BluetoothReceiver extends BroadcastReceiver {
 
             Location location = null;
             if (gpsListener != null) {
-                final long gpsTimeout = prefs.getLong(ListFragment.PREF_GPS_TIMEOUT, GPSListener.GPS_TIMEOUT_DEFAULT);
-                final long netLocTimeout = prefs.getLong(ListFragment.PREF_NET_LOC_TIMEOUT, GPSListener.NET_LOC_TIMEOUT_DEFAULT);
-                gpsListener.checkLocationOK(gpsTimeout, netLocTimeout);
-                location = gpsListener.getLocation();
+                location = gpsListener.checkGetLocation(prefs);
             } else {
-                MainActivity.warn("null gpsListener in BTR onReceive");
+                MainActivity.error("null gpsListener in BTR onReceive");
             }
 
             //ALIBI: shamelessly re-using frequency here for device type.
@@ -662,7 +659,7 @@ public final class BluetoothReceiver extends BroadcastReceiver {
 
         if (newForRun && network != null) {
             //ALIBI: sanity check used in debugging
-            MainActivity.warn("runNetworks not working as expected (add -> true, but networkCache already contained)");
+            MainActivity.error("runNetworks not working as expected (add -> true, but networkCache already contained)");
         }
 
         boolean deviceTypeUpdate = false;
@@ -760,21 +757,49 @@ public final class BluetoothReceiver extends BroadcastReceiver {
             }
         }
 
+        if ( location == null ) {
+            if ( prevGpsLocation != null ) {
+                dbHelper.lastLocation( prevGpsLocation );
+                // MainActivity.info("set last location for lerping");
+            }
+        } else {
+            dbHelper.recoverLocations( location );
+        }
+
+        // do distance calcs
+        if ( location != null && GPS_PROVIDER.equals( location.getProvider() )
+                && location.getAccuracy() <= ListFragment.MIN_DISTANCE_ACCURACY ) {
+            if ( prevGpsLocation != null ) {
+                float dist = location.distanceTo( prevGpsLocation );
+                // info( "dist: " + dist );
+                if ( dist > 0f ) {
+                    final SharedPreferences.Editor edit = prefs.edit();
+                    edit.putFloat( ListFragment.PREF_DISTANCE_RUN,
+                            dist + prefs.getFloat( ListFragment.PREF_DISTANCE_RUN, 0f ) );
+                    edit.putFloat( ListFragment.PREF_DISTANCE_TOTAL,
+                            dist + prefs.getFloat( ListFragment.PREF_DISTANCE_TOTAL, 0f ) );
+                    edit.apply();
+                }
+            }
+
+            // set for next time
+            prevGpsLocation = location;
+        }
+
         //Store to DB
         boolean matches = false;
         if (bssidDbMatcher != null) {
             bssidDbMatcher.reset(network.getBssid());
             matches = bssidDbMatcher.find();
         }
-        if ( location != null ) {
-            // w/ location
-            if (!matches) {
+        if (!matches) {
+            if (location != null) {
+                // w/ location
                 dbHelper.addObservation(network, location, newForRun, deviceTypeUpdate, btTypeUpdate);
-            }
-        } else {
-            // bob asks "since BT are often indoors, should we be saving regardless of loc?"
-            // w/out location
-            if (!matches) {
+            } else {
+                //DEBUG: MainActivity.error("added pending: "+ network.getBssid());
+                // bob asks "since BT are often indoors, should we be saving regardless of loc?"
+                // w/out location
                 dbHelper.pendingObservation(network, newForRun, deviceTypeUpdate, btTypeUpdate);
             }
         }

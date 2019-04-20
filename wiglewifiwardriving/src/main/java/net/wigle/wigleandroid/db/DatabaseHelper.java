@@ -618,7 +618,7 @@ public final class DatabaseHelper extends Thread {
         // data is lost if queue is full!
         boolean added = queue.offer( update );
         if ( ! added ) {
-            MainActivity.info( "queue full, not adding: " + network.getBssid() + " ssid: " + network.getSsid() );
+            MainActivity.warn( "queue full, not adding: " + network.getBssid() + " ssid: " + network.getSsid() );
             if ( System.currentTimeMillis() - prevQueueCullTime > QUEUE_CULL_TIMEOUT ) {
                 MainActivity.info("culling queue. size: " + queue.size() );
                 // go thru the queue, cull out anything not newForRun
@@ -973,7 +973,7 @@ public final class DatabaseHelper extends Thread {
 
                         added = pending.offer( update );
                         if ( ! added ) {
-                            MainActivity.info( "pending queue still full post-dup-purge, couldn't add: " + network.getBssid() );
+                            MainActivity.warn( "pending queue still full post-dup-purge, couldn't add: " + network.getBssid() );
                         }
                     }
                     prevPendingQueueCullTime = System.currentTimeMillis();
@@ -1037,7 +1037,7 @@ public final class DatabaseHelper extends Thread {
                         pend.frequencyChanged, pend.typeMorphed) ) {
                     count++;
                 } else {
-                    MainActivity.info( "failed to add "+pend );
+                    MainActivity.error( "failed to add "+pend );
                 }
                 // XXX: altitude? worth it?
             }
