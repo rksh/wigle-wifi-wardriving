@@ -50,6 +50,9 @@ public class FileUtility {
             } else {
                 return (long) (stats.getAvailableBlocks() * stats.getBlockSize());
             }
+        } catch (IllegalArgumentException iae) {
+            MainActivity.error("Unable to determine free space: ",iae);
+            return Long.MAX_VALUE;
         } catch (Exception ex) {
             // if we can't determine free space, be optimistic. Possibly because of missing permission?
             MainActivity.error("Unable to determine free space: ",ex);
