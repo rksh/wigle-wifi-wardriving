@@ -21,7 +21,8 @@ jobs:
         cache: gradle
     - name: Update API KEY from Secrets
       env:
-        MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+        MAPS_API_KEY: TESTTESTTEST
+        # ${{ secrets.MAPS_API_KEY }}
       run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
