@@ -258,6 +258,25 @@
         android:layout_height="wrap_content"
         android:text="@string/enable_map_bearing" />
 
+    <CheckBox android:id="@+id/foss_maps"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/use_foss_maps" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/foss_map_url_input_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/foss_map_base_url">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_foss_map_base_url"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            />
+        <!-- app:suffixText="{z}/{x}/{y}.pbf or .mvt" -->
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
