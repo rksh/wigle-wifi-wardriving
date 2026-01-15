@@ -873,6 +873,16 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
         } else if (navId == R.id.nav_data) {
             return DataFragment.class;
         } else if (navId == R.id.nav_search) {
+            if (null != mainActivity) {
+                SharedPreferences prefs = mainActivity.getSharedPreferences(PreferenceKeys.SHARED_PREFS, Context.MODE_PRIVATE);
+                if (null != prefs) {
+                    if (prefs.getBoolean(PreferenceKeys.PREF_USE_FOSS_MAPS, false)) {
+                        return FossSearchFragment.class;
+                    } else {
+                        return SearchFragment.class;
+                    }
+                }
+            }
             return SearchFragment.class;
         } else if (navId == R.id.nav_map) {
             return MappingFragment.class;

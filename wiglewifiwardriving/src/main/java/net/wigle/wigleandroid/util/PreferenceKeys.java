@@ -105,5 +105,6 @@ public class PreferenceKeys {
     public static final String PREF_MAPF_ENABLED = "mapfEnabled";
     public static final String FILTER_PREF_PREFIX = "LA";
     public static final String PREF_GUESS_BLE_ADDRESS_TYPE = "guessBleAddressType";
-
+    public static final String PREF_USE_FOSS_MAPS = "useFossMaps";
+    public static final String PREF_FOSS_MAPS_VECTOR_TILE_BASE_URL = "fossMapsBaseTileUrl";
 }
