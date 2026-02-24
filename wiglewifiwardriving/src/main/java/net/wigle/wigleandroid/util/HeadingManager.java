@@ -151,7 +151,7 @@ public class HeadingManager implements SensorEventListener {
 
         // Sensor callbacks run on background thread; must show toast on main thread
         new Handler(Looper.getMainLooper()).post(() -> {
-            if (context != null && (!(context instanceof Activity) || !((Activity) context).isFinishing())) {
+            if (context != null && context instanceof Activity && !((Activity) context).isFinishing()) {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
