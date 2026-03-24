@@ -1,5 +1,6 @@
 package net.wigle.wigleandroid;
 
+import static android.Manifest.permission.BLUETOOTH_SCAN;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static net.wigle.wigleandroid.util.BluetoothUtil.BLE_SERVICE_CHARACTERISTIC_MAP;
@@ -568,6 +569,11 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
         }
         final AtomicBoolean done = new AtomicBoolean(false);
         final Button pair = findViewById(R.id.query_ble_network);
+        if (this.checkSelfPermission(BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED && null != pair) {
+            pair.setVisibility(GONE);
+            return;
+        }
+
         final View charView = findViewById(R.id.ble_chars_row);
         final TextView charContents = findViewById(R.id.ble_chars_content);
         if (null != pair) {
@@ -769,7 +775,9 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
                         found.set(false);
                         charView.setVisibility(GONE);
                         showProgressCenter(pair);
-                        bluetoothAdapter.startLeScan(scanCallback); //TODO: should already be going on
+                        if (this.checkSelfPermission(BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
+                            bluetoothAdapter.startLeScan(scanCallback); //TODO: should already be going on
+                        }
                     }
                 }
             });
