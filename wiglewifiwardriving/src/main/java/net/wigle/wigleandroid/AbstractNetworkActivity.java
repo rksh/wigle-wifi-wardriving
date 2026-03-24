@@ -1,5 +1,6 @@
 package net.wigle.wigleandroid;
 
+import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -27,6 +28,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.location.Location;
+import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -562,6 +564,22 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
         //ListFragment.lameStatic.dbHelper.addToQueue( request );
     }
 
+    /**
+     * Runtime checks for {@link BluetoothAdapter#startLeScan}: API 31+ uses {@link Manifest.permission#BLUETOOTH_SCAN};
+     * API 29–30 (and earlier through 23) require {@link Manifest.permission#ACCESS_FINE_LOCATION} or
+     * {@link Manifest.permission#ACCESS_COARSE_LOCATION} because scan results are treated as location data.
+     */
+    private boolean hasBleLeScanPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        if (Build.VERSION.SDK_INT >= 31) {
+            return ActivityCompat.checkSelfPermission(this, BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED;
+        }
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
     private void setupBleInspection(Activity activity, final Network network) {
         View interrogateView = findViewById(R.id.ble_tools_row);
         if (interrogateView != null) {
@@ -569,7 +587,7 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
         }
         final AtomicBoolean done = new AtomicBoolean(false);
         final Button pair = findViewById(R.id.query_ble_network);
-        if (this.checkSelfPermission(BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED && null != pair) {
+        if (!hasBleLeScanPermissions() && null != pair) {
             pair.setVisibility(GONE);
             return;
         }
@@ -768,16 +786,14 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
             final BluetoothAdapter.LeScanCallback scanCallback = getLeScanCallback(network, found, done, gattCallback);
 
             pair.setOnClickListener(buttonView -> {
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+                if (hasBleLeScanPermissions()) {
                     final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                     if (bluetoothAdapter != null) {
                         done.set(false);
                         found.set(false);
                         charView.setVisibility(GONE);
                         showProgressCenter(pair);
-                        if (this.checkSelfPermission(BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-                            bluetoothAdapter.startLeScan(scanCallback); //TODO: should already be going on
-                        }
+                        bluetoothAdapter.startLeScan(scanCallback); //TODO: should already be going on
                     }
                 }
             });
