@@ -580,6 +580,7 @@ public abstract class AbstractNetworkActivity extends ScreenChildActivity implem
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
+    @SuppressWarnings("MissingPermission") //ALIBI: hasBleLeScanPermissions handles this
     private void setupBleInspection(Activity activity, final Network network) {
         View interrogateView = findViewById(R.id.ble_tools_row);
         if (interrogateView != null) {
