@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Batterioptimering</string>
     <string name="battery_opt_status_exempted">Fritaget</string>
     <string name="battery_opt_status_not_exempted">Ikke fritaget (tryk for at ændre)</string>
+    <string name="phone_permission_detail">WiGLE kan slå app-lyd fra, når du besvarer et indgående opkald på din enhed. Denne tilladelse fortæller appen, at den skal stoppe med at afspille lyde, så du kan tale.</string>
 </resources>

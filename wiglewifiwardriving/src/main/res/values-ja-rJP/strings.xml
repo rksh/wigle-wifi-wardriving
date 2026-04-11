@@ -494,4 +494,5 @@ KMLにエクスポート</string>
     <string name="battery_opt_settings_title">バッテリ最適化</string>
     <string name="battery_opt_status_exempted">除外済み</string>
     <string name="battery_opt_status_not_exempted">除外されていません（タップして変更）</string>
+    <string name="phone_permission_detail">WiGLE は、端末で着信に応答するときにアプリの音声をミュートできます。この権限は、通話できるようアプリに音を止める必要があることを伝えます。</string>
 </resources>

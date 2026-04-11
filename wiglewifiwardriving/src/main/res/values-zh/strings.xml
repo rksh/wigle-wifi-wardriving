@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">电池优化</string>
     <string name="battery_opt_status_exempted">已豁免</string>
     <string name="battery_opt_status_not_exempted">未豁免（点击更改）</string>
+    <string name="phone_permission_detail">WiGLE 可在您于设备上接听来电时将应用音频静音。此权限会告知应用需要停止播放声音以便您通话。</string>
 </resources>

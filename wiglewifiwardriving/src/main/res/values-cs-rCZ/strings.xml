@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Optimalizace baterie</string>
     <string name="battery_opt_status_exempted">Vyloučeno</string>
     <string name="battery_opt_status_not_exempted">Nevyloučeno (klepněte pro změnu)</string>
+    <string name="phone_permission_detail">WiGLE může ztlumit zvuk aplikace, když na zařízení přijmete příchozí hovor. Toto oprávnění aplikaci sdělí, že má přestat přehrávat zvuky, abyste mohli mluvit.</string>
 </resources>

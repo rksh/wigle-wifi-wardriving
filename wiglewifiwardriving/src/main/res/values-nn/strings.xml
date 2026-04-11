@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Batterioptimalisering</string>
     <string name="battery_opt_status_exempted">Fritatt</string>
     <string name="battery_opt_status_not_exempted">Ikkje fritatt (trykk for å endre)</string>
+    <string name="phone_permission_detail">WiGLE kan dempe app-lyd når du svarer på ein innkommande samtale på eininga di. Løyvet fortel appen at ho skal slutte å lage lyd, så du kan snakke.</string>
 </resources>

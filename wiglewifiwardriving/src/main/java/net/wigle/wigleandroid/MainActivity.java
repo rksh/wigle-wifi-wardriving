@@ -619,10 +619,31 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
 
             Logging.info("no permission for " + permissionsNeeded);
 
-            // Fire off an async request to actually get the permission
-            // This will show the standard permission request dialog UI
-            requestPermissions(permissionsList.toArray(new String[0]),
-                    PERMISSIONS_REQUEST);
+            final String[] permissionsArray = permissionsList.toArray(new String[0]);
+            if (permissionsList.contains(Manifest.permission.READ_PHONE_STATE)) {
+                showReadPhoneStatePermissionExplanation(permissionsArray);
+            } else {
+                requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
+            }
+        }
+    }
+
+    /**
+     * This is a reall common source of complaints from users. Let's be explicit.
+     */
+    private void showReadPhoneStatePermissionExplanation(final String[] permissionsArray) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.phone_permission_detail);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
+            dialog.dismiss();
+        });
+        try {
+            builder.show();
+        } catch (Exception ex) {
+            Logging.info("Failed to showread phone state permission explanation: " + ex);
+            requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
         }
     }
 

@@ -490,4 +490,5 @@
     <string name="battery_opt_settings_title">Otimização da bateria</string>
     <string name="battery_opt_status_exempted">Isento</string>
     <string name="battery_opt_status_not_exempted">Não isento (toque para alterar)</string>
+    <string name="phone_permission_detail">O WiGLE pode silenciar o áudio da aplicação quando atende uma chamada recebida no dispositivo. Esta permissão informa a aplicação de que deve deixar de reproduzir sons para poder falar.</string>
 </resources>
