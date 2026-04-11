@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Optymalizacja baterii</string>
     <string name="battery_opt_status_exempted">Zwolnione</string>
     <string name="battery_opt_status_not_exempted">Nie zwolnione (dotknij, aby zmienić)</string>
+    <string name="phone_permission_detail">WiGLE może wyciszyć dźwięk aplikacji po odebraniu połączenia przychodzącego na urządzeniu. To uprawnienie informuje aplikację, że ma przestać odtwarzać dźwięki, aby można było rozmawiać.</string>
 </resources>

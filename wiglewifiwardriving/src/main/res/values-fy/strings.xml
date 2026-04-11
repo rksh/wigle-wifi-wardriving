@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Batterij-optimalisaasje</string>
     <string name="battery_opt_status_exempted">Frijsteld</string>
     <string name="battery_opt_status_not_exempted">Net frijsteld (tik om te wizigjen)</string>
+    <string name="phone_permission_detail">WiGLE kin app-audio útzetten ast jo in ynkommend petear op jo tillefoan oannimme. Dizze tastimming jout de app troch dat er gjin lûden mear ôfspylje moat, sadat jo prate kinne.</string>
 </resources>

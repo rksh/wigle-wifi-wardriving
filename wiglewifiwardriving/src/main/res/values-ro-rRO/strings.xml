@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Optimizare baterie</string>
     <string name="battery_opt_status_exempted">Exemptat</string>
     <string name="battery_opt_status_not_exempted">Neexemptat (apasă pentru a modifica)</string>
+    <string name="phone_permission_detail">WiGLE poate dezactiva sunetul aplicației când acceptați un apel primit pe dispozitiv. Această permisiune îi spune aplicației să nu mai redea sunete, astfel încât să puteți vorbi.</string>
 </resources>

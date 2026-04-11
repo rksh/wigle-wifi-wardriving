@@ -490,4 +490,5 @@
     <string name="battery_opt_settings_title">बैटरी अनुकूलन</string>
     <string name="battery_opt_status_exempted">छूट प्राप्त</string>
     <string name="battery_opt_status_not_exempted">छूट प्राप्त नहीं (बदलने के लिए टैप करें)</string>
+    <string name="phone_permission_detail">जब आप अपने डिवाइस पर आने वाली कॉल स्वीकार करते हैं तो WiGLE एप्लिकेशन का ऑडियो म्यूट कर सकता है। यह अनुमति ऐप को बताती है कि आवाज़ें बंद करनी चाहिए ताकि आप बात कर सकें।</string>
 </resources>

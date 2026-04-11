@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">تحسين البطارية</string>
     <string name="battery_opt_status_exempted">معفى</string>
     <string name="battery_opt_status_not_exempted">غير معفى (انقر للتغيير)</string>
+    <string name="phone_permission_detail">يمكن لتطبيق WiGLE كتم صوت التطبيق عندما تردّ على مكالمة واردة على جهازك. يُعلم هذا الإذن التطبيق بأنه يجب أن يتوقف عن تشغيل الأصوات حتى تتمكن من التحدث.</string>
 </resources>

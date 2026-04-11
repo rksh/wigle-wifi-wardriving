@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Akkumulátor-optimalizálás</string>
     <string name="battery_opt_status_exempted">Mentesítve</string>
     <string name="battery_opt_status_not_exempted">Nincs mentesítve (érintse a módosításhoz)</string>
+    <string name="phone_permission_detail">A WiGLE elnémíthatja az alkalmazás hangját, ha fogad egy bejövő hívást az eszközén. Ez az engedély közli az alkalmazással, hogy le kell állítania a hangokat, hogy Ön beszélhessen.</string>
 </resources>

@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Batterioptimering</string>
     <string name="battery_opt_status_exempted">Undantagen</string>
     <string name="battery_opt_status_not_exempted">Inte undantagen (tryck för att ändra)</string>
+    <string name="phone_permission_detail">WiGLE kan tysta applikationsljud när du besvarar ett inkommande samtal på enheten. Detta tillstånd talar om för appen att den ska sluta spela upp ljud så att du kan prata.</string>
 </resources>

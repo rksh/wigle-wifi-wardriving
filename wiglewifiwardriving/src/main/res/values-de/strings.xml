@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Batterieoptimierung</string>
     <string name="battery_opt_status_exempted">Ausgenommen</string>
     <string name="battery_opt_status_not_exempted">Nicht ausgenommen (tippen zum Ändern)</string>
+    <string name="phone_permission_detail">WiGLE kann die App-Audioausgabe stumm schalten, wenn Sie einen eingehenden Anruf auf Ihrem Gerät annehmen. Mit dieser Berechtigung erfährt die App, dass sie keine Töne mehr abspielen soll, damit Sie sprechen können.</string>
 </resources>

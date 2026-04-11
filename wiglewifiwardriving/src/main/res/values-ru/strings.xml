@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Оптимизация батареи</string>
     <string name="battery_opt_status_exempted">Исключено</string>
     <string name="battery_opt_status_not_exempted">Не исключено (нажмите для изменения)</string>
+    <string name="phone_permission_detail">WiGLE может приглушить звук приложения, когда вы принимаете входящий вызов на устройстве. Это разрешение сообщает приложению, что нужно прекратить воспроизведение звуков, чтобы вы могли говорить.</string>
 </resources>

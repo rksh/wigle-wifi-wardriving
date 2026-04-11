@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">Ottimizzazione batteria</string>
     <string name="battery_opt_status_exempted">Esonerato</string>
     <string name="battery_opt_status_not_exempted">Non esonerato (tocca per modificare)</string>
+    <string name="phone_permission_detail">WiGLE può disattivare l\'audio dell\'app quando accetti una chiamata in arrivo sul dispositivo. Questo permesso comunica all\'app di interrompere i suoni per permetterti di parlare.</string>
 </resources>

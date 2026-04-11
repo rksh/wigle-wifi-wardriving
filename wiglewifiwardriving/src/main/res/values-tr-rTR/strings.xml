@@ -491,5 +491,6 @@
     <string name="battery_opt_settings_title">Pil optimizasyonu</string>
     <string name="battery_opt_status_exempted">Muaf</string>
     <string name="battery_opt_status_not_exempted">Muaf değil (değiştirmek için dokunun)</string>
+    <string name="phone_permission_detail">WiGLE, cihazınızda gelen bir aramayı kabul ettiğinizde uygulama sesini susturabilir. Bu izin, uygulamaya konuşabilmeniz için sesleri durdurması gerektiğini bildirir.</string>
 </resources>
 

@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -583,6 +584,11 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
     }
 
     private void setupPermissions() {
+        final SharedPreferences permPrefs = getSharedPreferences(PreferenceKeys.SHARED_PREFS, Context.MODE_PRIVATE);
+        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                && permPrefs.getBoolean(PreferenceKeys.PREF_PHONE_PERMISSION_DECLINED, false)) {
+            permPrefs.edit().putBoolean(PreferenceKeys.PREF_PHONE_PERMISSION_DECLINED, false).apply();
+        }
         final List<String> permissionsNeeded = new ArrayList<>();
         final List<String> permissionsList = new ArrayList<>();
         if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -592,7 +598,9 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
             permissionsNeeded.add(mainActivity.getString(R.string.cell_permission));
         }
         addPermission(permissionsList, Manifest.permission.BLUETOOTH);
-        addPermission(permissionsList, Manifest.permission.READ_PHONE_STATE);
+        if (!permPrefs.getBoolean(PreferenceKeys.PREF_PHONE_PERMISSION_DECLINED, false)) {
+            addPermission(permissionsList, Manifest.permission.READ_PHONE_STATE);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             addPermission(permissionsList, Manifest.permission.BLUETOOTH_SCAN);
@@ -619,10 +627,56 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
 
             Logging.info("no permission for " + permissionsNeeded);
 
-            // Fire off an async request to actually get the permission
-            // This will show the standard permission request dialog UI
-            requestPermissions(permissionsList.toArray(new String[0]),
-                    PERMISSIONS_REQUEST);
+            final String[] permissionsArray = permissionsList.toArray(new String[0]);
+            if (permissionsList.contains(Manifest.permission.READ_PHONE_STATE)) {
+                showReadPhoneStatePermissionExplanation(permissionsArray);
+            } else {
+                requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
+            }
+        }
+    }
+
+    /**
+     * This is a really common source of complaints from users. Let's be explicit.
+     */
+    private void showReadPhoneStatePermissionExplanation(final String[] permissionsArray) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        try {
+            final PermissionInfo permInfo = getPackageManager().getPermissionInfo(
+                    Manifest.permission.READ_PHONE_STATE, 0);
+            final CharSequence title = permInfo.loadLabel(getPackageManager());
+            if (title != null && title.length() > 0) {
+                builder.setTitle(title);
+            }
+        } catch (PackageManager.NameNotFoundException ex) {
+            Logging.info("READ_PHONE_STATE permission info not found: " + ex);
+        }
+        builder.setMessage(R.string.phone_permission_detail);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
+            dialog.dismiss();
+        });
+        builder.setNegativeButton(R.string.battery_opt_not_now, (dialog, which) -> {
+            getSharedPreferences(PreferenceKeys.SHARED_PREFS, Context.MODE_PRIVATE).edit()
+                    .putBoolean(PreferenceKeys.PREF_PHONE_PERMISSION_DECLINED, true)
+                    .apply();
+            final ArrayList<String> withoutPhone = new ArrayList<>();
+            for (final String permission : permissionsArray) {
+                if (!Manifest.permission.READ_PHONE_STATE.equals(permission)) {
+                    withoutPhone.add(permission);
+                }
+            }
+            if (!withoutPhone.isEmpty()) {
+                requestPermissions(withoutPhone.toArray(new String[0]), PERMISSIONS_REQUEST);
+            }
+            dialog.dismiss();
+        });
+        try {
+            builder.show();
+        } catch (Exception ex) {
+            Logging.info("exception showing read phone state permission explanation: " + ex);
+            requestPermissions(permissionsArray, PERMISSIONS_REQUEST);
         }
     }
 
@@ -644,6 +698,18 @@ public final class MainActivity extends AppCompatActivity implements TextToSpeec
             case PERMISSIONS_REQUEST: {
                 Logging.info("location grant response permissions: " + Arrays.toString(permissions)
                         + " grantResults: " + Arrays.toString(grantResults));
+
+                final SharedPreferences permPrefs = getSharedPreferences(PreferenceKeys.SHARED_PREFS,
+                        Context.MODE_PRIVATE);
+                Boolean phoneDeclined = null;
+                for (int i = 0; i < permissions.length; i++) {
+                    if (Manifest.permission.READ_PHONE_STATE.equals(permissions[i])) {
+                        phoneDeclined = grantResults[i] != PackageManager.PERMISSION_GRANTED;
+                    }
+                }
+                if (phoneDeclined != null) {
+                    permPrefs.edit().putBoolean(PreferenceKeys.PREF_PHONE_PERMISSION_DECLINED, phoneDeclined).apply();
+                }
 
                 boolean restart = false;
                 for (int i = 0; i < permissions.length; i++) {

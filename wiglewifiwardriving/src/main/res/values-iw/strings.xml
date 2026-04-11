@@ -491,4 +491,5 @@
     <string name="battery_opt_settings_title">אופטימיזציית סוללה</string>
     <string name="battery_opt_status_exempted">פטור</string>
     <string name="battery_opt_status_not_exempted">לא פטור (הקש לשינוי)</string>
+    <string name="phone_permission_detail">WiGLE יכול להשתיק את שמע האפליקציה כשאתה מקבל שיחה נכנסת במכשיר. ההרשאה הזו מודיעה לאפליקציה שעליה להפסיק להשמיע צלילים כדי שתוכל לדבר.</string>
 </resources>

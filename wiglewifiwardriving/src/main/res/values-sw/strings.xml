@@ -490,4 +490,5 @@
     <string name="battery_opt_settings_title">Uboreshaji wa betri</string>
     <string name="battery_opt_status_exempted">Umeondolewa</string>
     <string name="battery_opt_status_not_exempted">Haijaondolewa (gusa kubadilisha)</string>
+    <string name="phone_permission_detail">WiGLE inaweza kuzima sauti ya programu unapokubali simu inayoingia kwenye kifaa chako. Ruhusa hii inaambia programu inahitaji kuacha sauti ili uweze kuongea.</string>
 </resources>
