@@ -1,5 +1,4 @@
 --- todo ---
-add frequency to CSV format (in conjunction w/ site)
 connection error message friendliness
 x-scanned-in-y addition to dashboard
 restage local DB from CSV export (partially complete)
@@ -9,7 +8,6 @@ pause/play on notification view, affects gps+wifi
 stop counting on startup
 show countdown while trying to close database
 debug logging mode
-add download of cell and BT observed
 tablet list+map layout
 NFC logging
 simple map circle mode if label+clustering off
@@ -50,7 +48,6 @@ a widget
 --- complete/obivated? ---
 import files, instead of uploading to site and downloading to app
 rssi on kml export
-on networkactivity record more observations on that network (site survey)
 
 
 --- ideas that have problematic trade-offs ---
