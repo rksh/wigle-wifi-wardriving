@@ -96,7 +96,7 @@
     <string name="network_querying">(preguntando…)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Mostrar contraseña</string>
-    <string name="setting_db_marker">Marcador de base de datos (desde donde comienzan las cargas):</string>
+    <string name="setting_db_marker">Marcador de BD (desde subida):</string>
     <string name="setting_high_up">Identificación más alta cargado:</string>
     <string name="setting_zero_out">¿Poner a cero el marcador de la base de datos?</string>
     <string name="setting_max_id">Identificación de carga máxima:</string>
@@ -491,4 +491,7 @@
     <string name="battery_opt_status_exempted">Eximido</string>
     <string name="battery_opt_status_not_exempted">No eximido (pulsar para cambiar)</string>
     <string name="phone_permission_detail">WiGLE puede silenciar el audio de la aplicación cuando aceptas una llamada entrante en tu dispositivo. Este permiso indica a la aplicación que debe dejar de reproducir sonidos para que puedas hablar.</string>
+    <string name="database_stats">Base de datos local (en el dispositivo):</string>
+    <string name="export">Exportar datos</string>
+    <string name="backup_restore">Copia de seguridad y restauración</string>
 </resources>

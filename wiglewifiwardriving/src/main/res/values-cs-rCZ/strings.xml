@@ -97,7 +97,7 @@
     <string name="network_querying">(dotazování&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Ukázat heslo</string>
-    <string name="setting_db_marker">Značka DB (odkud začínají záznamy):</string>
+    <string name="setting_db_marker">Značka DB (nahrávání od):</string>
     <string name="setting_high_up">Nejvyšší nahrané id:</string>
     <string name="setting_zero_out">Vynulovat značku DB?</string>
     <string name="setting_max_id">Maximální nahrané id:</string>
@@ -492,4 +492,7 @@
     <string name="battery_opt_status_exempted">Vyloučeno</string>
     <string name="battery_opt_status_not_exempted">Nevyloučeno (klepněte pro změnu)</string>
     <string name="phone_permission_detail">WiGLE může ztlumit zvuk aplikace, když na zařízení přijmete příchozí hovor. Toto oprávnění aplikaci sdělí, že má přestat přehrávat zvuky, abyste mohli mluvit.</string>
+    <string name="database_stats">Místní databáze (v zařízení):</string>
+    <string name="export">Export dat</string>
+    <string name="backup_restore">Zálohování a obnovení</string>
 </resources>

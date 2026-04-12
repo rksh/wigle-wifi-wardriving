@@ -97,7 +97,7 @@
     <string name="network_querying">(sorgulama&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Parolayı Göster</string>
-    <string name="setting_db_marker">DB Marker (yükleme nerede başlıyor):</string>
+    <string name="setting_db_marker">DB işareti (yükleme bu noktadan):</string>
     <string name="setting_high_up">En çok yüklenen:</string>
     <string name="setting_zero_out">DB İşsaretleyicisini sıfırla?</string>
     <string name="setting_max_id">En fazla yükleme:</string>
@@ -492,5 +492,8 @@
     <string name="battery_opt_status_exempted">Muaf</string>
     <string name="battery_opt_status_not_exempted">Muaf değil (değiştirmek için dokunun)</string>
     <string name="phone_permission_detail">WiGLE, cihazınızda gelen bir aramayı kabul ettiğinizde uygulama sesini susturabilir. Bu izin, uygulamaya konuşabilmeniz için sesleri durdurması gerektiğini bildirir.</string>
+    <string name="database_stats">Yerel (cihazdaki) veritabanı:</string>
+    <string name="export">Veri dışa aktarma</string>
+    <string name="backup_restore">Yedekleme ve geri yükleme</string>
 </resources>
 

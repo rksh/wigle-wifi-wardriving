@@ -10,6 +10,7 @@ import net.wigle.wigleandroid.background.ObservationImporter;
 import net.wigle.wigleandroid.background.ObservationUploader;
 import net.wigle.wigleandroid.background.KmlWriter;
 import net.wigle.wigleandroid.db.DBException;
+import net.wigle.wigleandroid.db.DatabaseHelper;
 import net.wigle.wigleandroid.model.NetworkFilterType;
 import net.wigle.wigleandroid.ui.LayoutUtil;
 import net.wigle.wigleandroid.ui.NetworkTypeArrayAdapter;
@@ -29,6 +30,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -50,7 +52,10 @@ import static net.wigle.wigleandroid.background.GpxExportRunnable.EXPORT_GPX_DIA
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * configure database settings
@@ -69,6 +74,11 @@ public final class DataFragment extends Fragment implements DialogListener {
     private static final int DELETE_DIALOG = 128;
     private static final int EXPORT_M8B_DIALOG = 129;
 
+    /**
+     * lock to prevent multiple count queries
+     */
+    private static final AtomicBoolean DB_TOTALS_QUERY_IN_FLIGHT = new AtomicBoolean(false);
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate( final Bundle savedInstanceState) {
@@ -85,7 +95,7 @@ public final class DataFragment extends Fragment implements DialogListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.data, container, false);
-
+        setupDbInfo( view );
         setupQueryInputs( view );
         setupQueryButtons( view );
         setupCsvButtons( view );
@@ -117,6 +127,94 @@ public final class DataFragment extends Fragment implements DialogListener {
                 ViewCompat.requestApplyInsets(view);
             }
         });
+    }
+
+    private void setupDbInfo(final View view) {
+        final TextView totalWifi = view.findViewById(R.id.database_wifi);
+        final TextView totalBt = view.findViewById(R.id.database_bt);
+        final TextView totalCell = view.findViewById(R.id.database_cell);
+        if (null != totalWifi) {
+            totalWifi.setText("-");
+        }
+        if (null != totalBt) {
+            totalBt.setText("-");
+        }
+        if (null != totalCell) {
+            totalCell.setText("-");
+        }
+
+        if (ListFragment.lameStatic == null || ListFragment.lameStatic.dbHelper == null
+                || ListFragment.lameStatic.executorService == null) {
+            return;
+        }
+
+        if (!DB_TOTALS_QUERY_IN_FLIGHT.compareAndSet(false, true)) {
+            return;
+        }
+        try {
+            ListFragment.lameStatic.executorService.submit(() -> {
+                try {
+                    final DatabaseHelper helper =
+                            ListFragment.lameStatic != null ? ListFragment.lameStatic.dbHelper : null;
+                    if (helper == null) {
+                        return;
+                    }
+                    final DatabaseHelper.NetworkCatTotals totals = helper.getNetworkTotalsByKindFromDB();
+                    final MainActivity main = MainActivity.getMainActivity();
+                    if (main != null) {
+                        main.runOnUiThread(() -> applyDbCatTotals(totals));
+                    }
+                } catch (final DBException ex) {
+                    Logging.error("getNetworkTotalsByKindFromDB: " + ex, ex);
+                    final MainActivity main = MainActivity.getMainActivity();
+                    if (main != null) {
+                        main.runOnUiThread(() -> applyDbCatTotals(null));
+                    }
+                } finally {
+                    DB_TOTALS_QUERY_IN_FLIGHT.set(false);
+                }
+            });
+        } catch (final RuntimeException ex) {
+            DB_TOTALS_QUERY_IN_FLIGHT.set(false);
+            throw ex;
+        }
+    }
+
+    /**
+     * safe update for long-running DB totals query; survives rotation/screen off
+     * @param totalsOrNull last-known return value from query
+     */
+    private static void applyDbCatTotals(@Nullable final DatabaseHelper.NetworkCatTotals totalsOrNull) {
+        final MainActivity main = MainActivity.getMainActivity();
+        if (main == null || main.isFinishing() || main.isDestroyed()) {
+            return;
+        }
+        final TextView totalWifi = main.findViewById(R.id.database_wifi);
+        final TextView totalBt = main.findViewById(R.id.database_bt);
+        final TextView totalCell = main.findViewById(R.id.database_cell);
+        if (totalsOrNull == null) {
+            if (null != totalWifi) {
+                totalWifi.setText("-");
+            }
+            if (null != totalBt) {
+                totalBt.setText("-");
+            }
+            if (null != totalCell) {
+                totalCell.setText("-");
+            }
+            return;
+        }
+        final Locale locale = main.getResources().getConfiguration().getLocales().get(0);
+        final NumberFormat nf = NumberFormat.getIntegerInstance(locale);
+        if (null != totalWifi) {
+            totalWifi.setText(nf.format(totalsOrNull.wifi));
+        }
+        if (null != totalBt) {
+            totalBt.setText(nf.format(totalsOrNull.bluetooth));
+        }
+        if (null != totalCell) {
+            totalCell.setText(nf.format(totalsOrNull.cell));
+        }
     }
 
     private void setupQueryInputs( final View view ) {
@@ -567,8 +665,11 @@ public final class DataFragment extends Fragment implements DialogListener {
             case EXPORT_M8B_DIALOG: {
                 if (!exportM8bFile()) {
                     Logging.warn("Failed to export m8b.");
-                    WiGLEToast.showOverFragment(getActivity(), R.string.error_general,
-                            getActivity().getResources().getString(R.string.m8b_failed));
+                    Activity a = getActivity();
+                    if (null != a) {
+                        WiGLEToast.showOverFragment(getActivity(), R.string.error_general,
+                                a.getResources().getString(R.string.m8b_failed));
+                    }
                 }
                 break;
             }

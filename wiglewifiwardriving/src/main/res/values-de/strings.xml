@@ -97,7 +97,7 @@
     <string name="network_querying">(frage ab&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Passwort anzeigen</string>
-    <string name="setting_db_marker">DB Marker (Uploads ab …):</string>
+    <string name="setting_db_marker">DB-Marker (Upload seit):</string>
     <string name="setting_high_up">Hochgeladen bis ID:</string>
     <string name="setting_zero_out">DB-Marker zurücksetzen?</string>
     <string name="setting_max_id">Max Upload-ID:</string>
@@ -492,4 +492,7 @@
     <string name="battery_opt_status_exempted">Ausgenommen</string>
     <string name="battery_opt_status_not_exempted">Nicht ausgenommen (tippen zum Ändern)</string>
     <string name="phone_permission_detail">WiGLE kann die App-Audioausgabe stumm schalten, wenn Sie einen eingehenden Anruf auf Ihrem Gerät annehmen. Mit dieser Berechtigung erfährt die App, dass sie keine Töne mehr abspielen soll, damit Sie sprechen können.</string>
+    <string name="database_stats">Lokale (geräteinterne) Datenbank:</string>
+    <string name="export">Datenexport</string>
+    <string name="backup_restore">Sichern und Wiederherstellen</string>
 </resources>

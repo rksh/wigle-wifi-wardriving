@@ -97,7 +97,7 @@
     <string name="network_querying">(осуществляется запрос&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Показывать пароль</string>
-    <string name="setting_db_marker">Настройки ID маркера в БД (там, где начинаются добавления):</string>
+    <string name="setting_db_marker">Маркер БД (загрузка с):</string>
     <string name="setting_high_up">Текущий ID в БД:</string>
     <string name="setting_zero_out">Обнулить ID в БД?</string>
     <string name="setting_max_id">Максимальный загруженый ID:</string>
@@ -492,4 +492,7 @@
     <string name="battery_opt_status_exempted">Исключено</string>
     <string name="battery_opt_status_not_exempted">Не исключено (нажмите для изменения)</string>
     <string name="phone_permission_detail">WiGLE может приглушить звук приложения, когда вы принимаете входящий вызов на устройстве. Это разрешение сообщает приложению, что нужно прекратить воспроизведение звуков, чтобы вы могли говорить.</string>
+    <string name="database_stats">Локальная база данных (на устройстве):</string>
+    <string name="export">Экспорт данных</string>
+    <string name="backup_restore">Резервное копирование и восстановление</string>
 </resources>
