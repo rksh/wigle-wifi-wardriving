@@ -495,4 +495,6 @@
     <string name="database_stats">Lokal (på enheden) database:</string>
     <string name="export">Dataeksport</string>
     <string name="backup_restore">Sikkerhedskopi og gendannelse</string>
+    <string name="flag_whole_database">Angiv hele databasen til upload</string>
+    <string name="file_size_warning">Filstørrelsen vil sandsynligvis overstige maksimum.</string>
 </resources>

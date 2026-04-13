@@ -495,4 +495,6 @@
     <string name="database_stats">Lokalna baza danych (w urządzeniu):</string>
     <string name="export">Eksport danych</string>
     <string name="backup_restore">Kopia zapasowa i przywracanie</string>
+    <string name="flag_whole_database">Oznacz całą bazę do przesłania</string>
+    <string name="file_size_warning">Rozmiar pliku prawdopodobnie przekroczy maksimum.</string>
 </resources>

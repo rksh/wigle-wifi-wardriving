@@ -494,4 +494,6 @@
     <string name="database_stats">स्थानीय (डिवाइस पर) डेटाबेस:</string>
     <string name="export">डेटा निर्यात</string>
     <string name="backup_restore">बैकअप और पुनर्स्थापना</string>
+    <string name="flag_whole_database">अपलोड के लिए पूरा डेटाबेस सेट करें</string>
+    <string name="file_size_warning">फ़ाइल आकार अधिकतम से अधिक होने की संभावना है।</string>
 </resources>

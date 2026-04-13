@@ -499,4 +499,6 @@
     <string name="database_stats">Local (on-device) database:</string>
     <string name="export">Data export</string>
     <string name="backup_restore">Backup and restore</string>
+    <string name="flag_whole_database">Set entire database for upload</string>
+    <string name="file_size_warning">File size will likely exceed maximum.</string>
 </resources>

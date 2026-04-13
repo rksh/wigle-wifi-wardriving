@@ -17,6 +17,7 @@ import net.wigle.wigleandroid.ui.NetworkTypeArrayAdapter;
 import net.wigle.wigleandroid.ui.WiFiSecurityTypeArrayAdapter;
 import net.wigle.wigleandroid.ui.WiGLEConfirmationDialog;
 import net.wigle.wigleandroid.ui.WiGLEToast;
+import net.wigle.wigleandroid.util.FileUtility;
 import net.wigle.wigleandroid.util.Logging;
 import net.wigle.wigleandroid.util.PreferenceKeys;
 import net.wigle.wigleandroid.util.SearchUtil;
@@ -459,15 +460,18 @@ public final class DataFragment extends Fragment implements DialogListener {
     @SuppressLint("SetTextI18n")
     private void setupMarkerButtons( final View view ) {
         SharedPreferences prefs = null;
+
         final Activity a = getActivity();
         if (null != a) {
             prefs = a.getSharedPreferences(PreferenceKeys.SHARED_PREFS, 0);
         }
 
-        // db marker reset button and text
-        final TextView tv = view.findViewById(R.id.reset_maxid_text);
+        // db marker maxout button and text
         if (null != prefs) {
-            tv.setText(getString(R.string.setting_high_up) + " " + prefs.getLong(PreferenceKeys.PREF_DB_MARKER, 0L));
+            refreshMarkerInfo(view, prefs);
+            final TextView maxtv = view.findViewById(R.id.maxout_maxid_text);
+            final long maxDB = prefs.getLong(PreferenceKeys.PREF_MAX_DB, 0L);
+            maxtv.setText(getString(R.string.setting_max_start) + " " + maxDB);
         }
 
         final Button resetMaxidButton = view.findViewById(R.id.reset_maxid_button);
@@ -480,13 +484,6 @@ public final class DataFragment extends Fragment implements DialogListener {
                 Logging.error("unable to get fragment activity");
             }
         });
-
-        // db marker maxout button and text
-        if (null != prefs) {
-            final TextView maxtv = view.findViewById(R.id.maxout_maxid_text);
-            final long maxDB = prefs.getLong(PreferenceKeys.PREF_MAX_DB, 0L);
-            maxtv.setText(getString(R.string.setting_max_start) + " " + maxDB);
-        }
 
         final Button maxoutMaxidButton = view.findViewById(R.id.maxout_maxid_button);
         maxoutMaxidButton.setOnClickListener(buttonView -> {
@@ -553,6 +550,31 @@ public final class DataFragment extends Fragment implements DialogListener {
                 Logging.error("unable to get fragment activity");
             }
         });
+    }
+
+    private void refreshMarkerInfo( final View view, final SharedPreferences prefs ) {
+        final MainActivity main = MainActivity.getMainActivity();
+        if (main != null && !main.isFinishing() && !main.isDestroyed()) {
+
+            if (null != prefs) {
+                // db marker text
+                final TextView tvCurr = view.findViewById(R.id.current_id);
+                Long current = prefs.getLong(PreferenceKeys.PREF_DB_MARKER, 0L);
+                final Locale locale = main.getResources().getConfiguration().getLocales().get(0);
+                final NumberFormat nf = NumberFormat.getIntegerInstance(locale);
+                tvCurr.setText(nf.format(current));
+
+                // db remaining text
+                final TextView tvOut = view.findViewById(R.id.upload_outstanding);
+                Long outstanding = prefs.getLong(PreferenceKeys.PREF_MAX_DB, 0L) - current;
+                tvOut.setText("("+nf.format(outstanding)+")");
+
+                if (FileUtility.checkUploadOversize(outstanding)) {
+                    final View warning = view.findViewById(R.id.warn_filesize);
+                    warning.setVisibility(VISIBLE);
+                }
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")

@@ -495,4 +495,6 @@
     <string name="database_stats">Bază de date locală (pe dispozitiv):</string>
     <string name="export">Export de date</string>
     <string name="backup_restore">Backup și restaurare</string>
+    <string name="flag_whole_database">Marchează întreaga bază pentru încărcare</string>
+    <string name="file_size_warning">Dimensiunea fișierului va depăși probabil maximul.</string>
 </resources>

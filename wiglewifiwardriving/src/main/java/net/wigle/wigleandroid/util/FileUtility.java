@@ -43,6 +43,11 @@ public class FileUtility {
     // Start warning if there isn't this much space left on the primary storage location for networks
     public final static long WARNING_THRESHOLD_BYTES = 131072;
 
+    public final static long WIGLE_MAX_UPLOAD_BYTES = 180000000;
+    public final static long MIN_BYTES_PER_CSV_ROW_EST = 130;
+    public final static long MAX_BYTES_PER_CSV_ROW_EST = 320;
+    public final static float LARGE_RECORD_PROBABILITY = 0.5f; //TODO: refine with research
+
     //based on the smart answer in https://stackoverflow.com/questions/7115016/how-to-find-the-amount-of-free-storage-disk-space-left-on-android
     public static long getFreeBytes(File path) {
         try {
@@ -388,4 +393,20 @@ public class FileUtility {
         return rawFiles;
     }
 
+    /**
+     * Evaluate the number of un-uploaded networks to determine whether the upload file is likely to require segmentation for upload. largely a placeholder
+     * @param outstanding the number of un-uploaded networks
+     * @return true if the upload file should be partitioned to avoid disqualification, otherwise false
+     */
+    public static boolean checkUploadOversize(final long outstanding) {
+        if (outstanding * MIN_BYTES_PER_CSV_ROW_EST > WIGLE_MAX_UPLOAD_BYTES) {
+            return true;
+        }
+        if  ((long)(outstanding * MAX_BYTES_PER_CSV_ROW_EST * LARGE_RECORD_PROBABILITY) > WIGLE_MAX_UPLOAD_BYTES) {
+            //TODO: there's a lot of nuance we can add here.
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -495,4 +495,6 @@
     <string name="database_stats">Helyi (eszközön lévő) adatbázis:</string>
     <string name="export">Adatexport</string>
     <string name="backup_restore">Biztonsági mentés és visszaállítás</string>
+    <string name="flag_whole_database">A teljes adatbázis jelölése feltöltésre</string>
+    <string name="file_size_warning">A fájlméret valószínűleg meghaladja a maximumot.</string>
 </resources>

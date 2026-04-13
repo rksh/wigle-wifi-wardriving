@@ -495,4 +495,6 @@
     <string name="database_stats">Lokale (geräteinterne) Datenbank:</string>
     <string name="export">Datenexport</string>
     <string name="backup_restore">Sichern und Wiederherstellen</string>
+    <string name="flag_whole_database">Gesamte Datenbank zum Upload markieren</string>
+    <string name="file_size_warning">Dateigröße überschreitet vermutlich das Maximum.</string>
 </resources>

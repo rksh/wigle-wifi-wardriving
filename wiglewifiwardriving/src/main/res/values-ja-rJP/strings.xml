@@ -498,4 +498,6 @@ KMLにエクスポート</string>
     <string name="database_stats">端末内のローカルデータベース:</string>
     <string name="export">データのエクスポート</string>
     <string name="backup_restore">バックアップと復元</string>
+    <string name="flag_whole_database">アップロード用にデータベース全体を設定</string>
+    <string name="file_size_warning">ファイルサイズが上限を超える可能性があります。</string>
 </resources>

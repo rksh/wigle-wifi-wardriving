@@ -495,4 +495,6 @@
     <string name="database_stats">本地（设备上）数据库：</string>
     <string name="export">数据导出</string>
     <string name="backup_restore">备份与恢复</string>
+    <string name="flag_whole_database">将整个数据库标记为上传</string>
+    <string name="file_size_warning">文件大小可能会超过上限。</string>
 </resources>

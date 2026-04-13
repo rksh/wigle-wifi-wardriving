@@ -495,4 +495,6 @@
     <string name="database_stats">Lokal (på eininga) database:</string>
     <string name="export">Dataeksport</string>
     <string name="backup_restore">Tryggingskopi og gjenoppretting</string>
+    <string name="flag_whole_database">Set heile databasen for opplasting</string>
+    <string name="file_size_warning">Filstorleiken vil truleg overskride maksimum.</string>
 </resources>

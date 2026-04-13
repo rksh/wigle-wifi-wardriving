@@ -495,4 +495,6 @@
     <string name="database_stats">Lokale (op it apparaat) database:</string>
     <string name="export">Data eksportearje</string>
     <string name="backup_restore">Backup en weromsette</string>
+    <string name="flag_whole_database">Hiele database foar upload setten</string>
+    <string name="file_size_warning">Bestânsgrutte sil neifoardacht it maksimum oerstige.</string>
 </resources>

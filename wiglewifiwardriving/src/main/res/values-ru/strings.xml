@@ -495,4 +495,6 @@
     <string name="database_stats">Локальная база данных (на устройстве):</string>
     <string name="export">Экспорт данных</string>
     <string name="backup_restore">Резервное копирование и восстановление</string>
+    <string name="flag_whole_database">Пометить всю базу для выгрузки</string>
+    <string name="file_size_warning">Размер файла, вероятно, превысит максимум.</string>
 </resources>

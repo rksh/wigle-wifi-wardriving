@@ -495,4 +495,6 @@
     <string name="database_stats">Paikallinen (laitteessa) tietokanta:</string>
     <string name="export">Tietojen vienti</string>
     <string name="backup_restore">Varmuuskopiointi ja palautus</string>
+    <string name="flag_whole_database">Merkitse koko tietokanta lähetettäväksi</string>
+    <string name="file_size_warning">Tiedoston koko ylittää todennäköisesti enimmäisrajan.</string>
 </resources>
