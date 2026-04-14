@@ -450,7 +450,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                         mainActivity.transferComplete();
                     }
                 },
-                this::recreateHostingActivity);
+                this::refreshDataTabOnUiThread);
         try {
             task.startDownload(this);
         } catch (WiGLEAuthException waex) {
@@ -554,25 +554,25 @@ public final class DataFragment extends Fragment implements DialogListener {
     }
 
     /**
-     * after DB delete or observation import, refresh the activity to update all stats.
-     */
-    private void recreateHostingActivity() {
+    * complete refresh of dynamic stats.
+    */
+    private void refreshDataTabOnUiThread() {
         final FragmentActivity activity = getActivity();
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             return;
         }
-        final View decor = activity.getWindow() != null ? activity.getWindow().getDecorView() : null;
-        final Runnable recreate = () -> {
-            if (activity.isFinishing() || activity.isDestroyed()) {
+        activity.runOnUiThread(() -> {
+            if (!isAdded() || activity.isFinishing() || activity.isDestroyed()) {
                 return;
             }
-            activity.recreate();
-        };
-        if (decor != null) {
-            decor.post(recreate);
-        } else {
-            activity.runOnUiThread(recreate);
-        }
+            final View v = getView();
+            if (v == null) {
+                return;
+            }
+            setupDbInfo(v);
+            setupImportObservedButton(v);
+            setupMarkerButtons(v);
+        });
     }
 
     /**
@@ -727,7 +727,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                 } else {
                     Logging.error("Null editor - unable to update DB marker");
                 }
-                recreateHostingActivity();
+                refreshDataTabOnUiThread();
                 break;
             }
             case EXPORT_M8B_DIALOG: {
