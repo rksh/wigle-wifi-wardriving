@@ -449,7 +449,8 @@ public final class DataFragment extends Fragment implements DialogListener {
                         }
                         mainActivity.transferComplete();
                     }
-                });
+                },
+                this::recreateHostingActivity);
         try {
             task.startDownload(this);
         } catch (WiGLEAuthException waex) {
@@ -469,9 +470,9 @@ public final class DataFragment extends Fragment implements DialogListener {
         // db marker maxout button and text
         if (null != prefs) {
             refreshMarkerInfo(view, prefs);
-            final TextView maxtv = view.findViewById(R.id.maxout_maxid_text);
+            final TextView maxText = view.findViewById(R.id.maxout_maxid_text);
             final long maxDB = prefs.getLong(PreferenceKeys.PREF_MAX_DB, 0L);
-            maxtv.setText(getString(R.string.setting_max_start) + " " + maxDB);
+            maxText.setText(getString(R.string.setting_max_start) + " " + maxDB);
         }
 
         final Button resetMaxidButton = view.findViewById(R.id.reset_maxid_button);
@@ -549,6 +550,49 @@ public final class DataFragment extends Fragment implements DialogListener {
             } else {
                 Logging.error("unable to get fragment activity");
             }
+        });
+    }
+
+    /**
+     * after DB delete or observation import, refresh the activity to update all stats.
+     */
+    private void recreateHostingActivity() {
+        final FragmentActivity activity = getActivity();
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+            return;
+        }
+        final View decor = activity.getWindow() != null ? activity.getWindow().getDecorView() : null;
+        final Runnable recreate = () -> {
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return;
+            }
+            activity.recreate();
+        };
+        if (decor != null) {
+            decor.post(recreate);
+        } else {
+            activity.runOnUiThread(recreate);
+        }
+    }
+
+    /**
+     * post a marker UI refresh on maxout/zero, or chunked upload completion.
+     */
+    private void scheduleRefreshMarkerInfoOnUiThread() {
+        final FragmentActivity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        activity.runOnUiThread(() -> {
+            if (!isAdded()) {
+                return;
+            }
+            final View v = getView();
+            if (v == null) {
+                return;
+            }
+            final SharedPreferences p = activity.getSharedPreferences(PreferenceKeys.SHARED_PREFS, 0);
+            refreshMarkerInfo(v, p);
         });
     }
 
@@ -640,6 +684,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                         final TextView tv = view.findViewById(R.id.reset_maxid_text);
                         tv.setText(getString(R.string.setting_max_id) + " 0");
                     }
+                    scheduleRefreshMarkerInfoOnUiThread();
                 } else {
                     Logging.error("Null editor - unable to update DB marker");
                 }
@@ -655,6 +700,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                         final TextView tv = view.findViewById(R.id.reset_maxid_text);
                         tv.setText(getString(R.string.setting_max_id) + " " + maxDB);
                     }
+                    scheduleRefreshMarkerInfoOnUiThread();
                 } else {
                     Logging.error("Null prefs/editor - unable to update DB marker");
                 }
@@ -681,7 +727,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                 } else {
                     Logging.error("Null editor - unable to update DB marker");
                 }
-
+                recreateHostingActivity();
                 break;
             }
             case EXPORT_M8B_DIALOG: {
