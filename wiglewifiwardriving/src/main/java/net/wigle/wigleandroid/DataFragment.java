@@ -806,6 +806,7 @@ public final class DataFragment extends Fragment implements DialogListener {
         super.onDestroy();
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void registerUploadCompleteReceiverIfNeeded() {
         if (uploadCompleteReceiverRegistered) {
             return;
