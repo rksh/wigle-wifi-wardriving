@@ -273,12 +273,18 @@ public class ObservationUploader extends AbstractProgressApiRequest {
                             List<String> transIds = uploadResults.getTransids().stream()
                                     .map(UploadReseponse.UploadTransaction::getTransId)
                                     .collect(Collectors.toList());
-                            if (transIds.size() > 0) {
+                            if (!transIds.isEmpty()) {
                                 final String transIdListStr = transIds.toString();
+                                Logging.info("upload resulted in transIds: "+transIdListStr);
+                                intent.putExtra(PreferenceKeys.PREF_MAX_DB, maxId);
+                                intent.putExtra(PreferenceKeys.PREF_DB_MARKER, maxId);
                                 intent.putExtra("transIds", transIdListStr);
                                 intent.setAction(UPLOAD_COMPLETE_INTENT);
+                                intent.setPackage(context.getPackageName());
                                 //NB: we'll still update the DB marker if no transIDs were generated.
                                 bundle.putString(BackgroundGuiHandler.TRANSIDS, transIdListStr);
+                            } else {
+                                Logging.warn("empty transIds on successful upload.");
                             }
                             //TODO: eventually learn about server-side donate=Y here
                         } else {

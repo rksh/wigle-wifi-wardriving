@@ -24,10 +24,13 @@ import net.wigle.wigleandroid.util.SearchUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -79,6 +82,20 @@ public final class DataFragment extends Fragment implements DialogListener {
      * lock to prevent multiple count queries
      */
     private static final AtomicBoolean DB_TOTALS_QUERY_IN_FLIGHT = new AtomicBoolean(false);
+    private boolean uploadCompleteReceiverRegistered = false;
+    private final BroadcastReceiver uploadCompleteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            if (intent == null) {
+                return;
+            }
+            final String action = intent.getAction();
+            if (WigleService.UPLOAD_COMPLETE_INTENT.equals(action)) {
+                Logging.info("received upload complete");
+                scheduleRefreshMarkerInfoOnUiThread();
+            }
+        }
+    };
 
     /** Called when the activity is first created. */
     @Override
@@ -581,14 +598,17 @@ public final class DataFragment extends Fragment implements DialogListener {
     private void scheduleRefreshMarkerInfoOnUiThread() {
         final FragmentActivity activity = getActivity();
         if (activity == null) {
+            Logging.error("null activity/cannot update on marker infos");
             return;
         }
         activity.runOnUiThread(() -> {
             if (!isAdded()) {
+                Logging.error("not added/cannot update on marker infos");
                 return;
             }
             final View v = getView();
             if (v == null) {
+                Logging.error("null view/cannot update on marker infos");
                 return;
             }
             final SharedPreferences p = activity.getSharedPreferences(PreferenceKeys.SHARED_PREFS, 0);
@@ -613,6 +633,7 @@ public final class DataFragment extends Fragment implements DialogListener {
                 Long outstanding = prefs.getLong(PreferenceKeys.PREF_MAX_DB, 0L) - current;
                 tvOut.setText("("+nf.format(outstanding)+")");
 
+                Logging.info("marker update complete");
                 if (FileUtility.checkUploadOversize(outstanding)) {
                     final View warning = view.findViewById(R.id.warn_filesize);
                     warning.setVisibility(VISIBLE);
@@ -760,6 +781,7 @@ public final class DataFragment extends Fragment implements DialogListener {
     public void onResume() {
         Logging.info( "resume data." );
         super.onResume();
+        registerUploadCompleteReceiverIfNeeded();
         try {
             final FragmentActivity fa = getActivity();
             if (null != fa) {
@@ -773,8 +795,50 @@ public final class DataFragment extends Fragment implements DialogListener {
     }
 
     @Override
+    public void onPause() {
+        unregisterUploadCompleteReceiverIfNeeded();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
+        unregisterUploadCompleteReceiverIfNeeded();
         super.onDestroy();
+    }
+
+    private void registerUploadCompleteReceiverIfNeeded() {
+        if (uploadCompleteReceiverRegistered) {
+            return;
+        }
+        final FragmentActivity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        final IntentFilter uploadCompleteFilter = new IntentFilter(WigleService.UPLOAD_COMPLETE_INTENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            activity.registerReceiver(uploadCompleteReceiver, uploadCompleteFilter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            activity.registerReceiver(uploadCompleteReceiver, uploadCompleteFilter);
+        }
+        uploadCompleteReceiverRegistered = true;
+    }
+
+    private void unregisterUploadCompleteReceiverIfNeeded() {
+        if (!uploadCompleteReceiverRegistered) {
+            return;
+        }
+        final FragmentActivity activity = getActivity();
+        if (activity == null) {
+            uploadCompleteReceiverRegistered = false;
+            return;
+        }
+        try {
+            activity.unregisterReceiver(uploadCompleteReceiver);
+        } catch (IllegalArgumentException iae) {
+            Logging.info("uploadCompleteReceiver not registered when unregistering", iae);
+        } finally {
+            uploadCompleteReceiverRegistered = false;
+        }
     }
 
     /**
