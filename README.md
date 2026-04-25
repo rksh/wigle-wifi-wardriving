@@ -45,7 +45,7 @@ Currently Android versions from Nougat (Android 7 / API 24) to Android 16 (API 3
 We receive various bug reports from forks/ports of Android to non-standard devices, but cannot address or test all possible variations. While we do our best to support the widest range of devices possible, the best way to get support for your device is to help us debug or to submit a pull request!
 
 ## Contributing
-You can submit fixes and changes for inclusion by forking this repository, working in a branch, and issuing a pull request. Langauge help and translations are VERY welcome.
+You can submit fixes and changes for inclusion by forking this repository, working in a branch, and issuing a pull request. Language help and translations are VERY welcome.
 
 We don't have a lot of contribution guidelines, but please:
 
