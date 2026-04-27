@@ -357,7 +357,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".listener.StartWigleAtBootReciever"
+            android:name=".listener.StartWigleAtBootReceiver"
             android:label="StartWigleAtBootReceiver"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
