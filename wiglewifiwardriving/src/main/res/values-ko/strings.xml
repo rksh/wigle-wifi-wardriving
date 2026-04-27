@@ -97,7 +97,7 @@
     <string name="network_querying">(querying&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">비밀 번호를 표시</string>
-    <string name="setting_db_marker">DB 마커(업로드 이후):</string>
+    <string name="setting_db_marker">DB 마커(마지막으로 업로드된 네트워크):</string>
     <string name="setting_high_up">최고 업로드 ID :</string>
     <string name="setting_zero_out">DB 마커 아웃 제로?</string>
     <string name="setting_max_id">최대 업로드 ID :</string>

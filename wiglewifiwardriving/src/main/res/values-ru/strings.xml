@@ -97,7 +97,7 @@
     <string name="network_querying">(осуществляется запрос&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Показывать пароль</string>
-    <string name="setting_db_marker">Маркер БД (загрузка с):</string>
+    <string name="setting_db_marker">Маркер БД (последняя загруженная сеть):</string>
     <string name="setting_high_up">Текущий ID в БД:</string>
     <string name="setting_zero_out">Обнулить ID в БД?</string>
     <string name="setting_max_id">Максимальный загруженый ID:</string>

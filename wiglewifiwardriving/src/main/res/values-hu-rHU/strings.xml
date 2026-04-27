@@ -97,7 +97,7 @@
     <string name="network_querying">(lekérés&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Jelszó megjelenítése</string>
-    <string name="setting_db_marker">DB-jelölő (feltöltés ettől):</string>
+    <string name="setting_db_marker">DB-jelölő (utolsó feltöltött hálózat):</string>
     <string name="setting_high_up">Legmagasabb feltöltésazonosító:</string>
     <string name="setting_zero_out">Biztos, hogy nullázza?</string>
     <string name="setting_max_id">Legnagyobb feltöltésazonosító:</string>

@@ -97,7 +97,7 @@
     <string name="network_querying">(Requête en cours&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Montrer le mot de passe</string>
-    <string name="setting_db_marker">Marqueur BDD (upload depuis):</string>
+    <string name="setting_db_marker">Marqueur BDD (dernier réseau téléversé):</string>
     <string name="setting_high_up">ID uploadé le plus élevé :</string>
     <string name="setting_zero_out">Mettre a zéro le marqueur dans la BDD?</string>
     <string name="setting_max_id">ID maximum uploadé :</string>

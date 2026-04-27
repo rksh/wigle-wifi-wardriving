@@ -97,7 +97,7 @@
     <string name="network_querying">(buscando&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Mostrar Senha</string>
-    <string name="setting_db_marker">Marcador do BD (upload desde):</string>
+    <string name="setting_db_marker">Marcador do BD (última rede enviada):</string>
     <string name="setting_high_up">ID mais alto enviado:</string>
     <string name="setting_zero_out">Zerar marcador do BD?</string>
     <string name="setting_max_id">ID de upload máximo:</string>

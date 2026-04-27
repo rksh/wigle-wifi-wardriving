@@ -96,7 +96,7 @@
     <string name="network_querying">（正查詢&#8230;）</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">顯示密碼</string>
-    <string name="setting_db_marker">數據庫標記（上傳起點）：</string>
+    <string name="setting_db_marker">數據庫標記（最後上傳的網絡）：</string>
     <string name="setting_high_up">最高上傳ID：</string>
     <string name="setting_zero_out">要清零數據庫的標記嗎？</string>
     <string name="setting_max_id">最大上傳ID：</string>

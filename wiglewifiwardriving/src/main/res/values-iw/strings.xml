@@ -97,7 +97,7 @@
     <string name="network_querying">(Querying&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">הצג סיסמה</string>
-    <string name="setting_db_marker">סמן מסד נתונים (העלאה‑מאז):</string>
+    <string name="setting_db_marker">סמן מסד נתונים (הרשת האחרונה שהועלתה):</string>
     <string name="setting_high_up">Id נטען גבוהה ביותר:</string>
     <string name="setting_zero_out">אפס את סמן DB?</string>
     <string name="setting_max_id">מקס להעלות id:</string>

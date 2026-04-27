@@ -97,7 +97,7 @@
     <string name="network_querying">(querying&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Show Password</string>
-    <string name="setting_db_marker">DB-markør (opplasting sidan):</string>
+    <string name="setting_db_marker">DB-markør (siste opplasta nettverk):</string>
     <string name="setting_high_up">Highest uploaded id:</string>
     <string name="setting_zero_out">Zero out DB marker?</string>
     <string name="setting_max_id">Max upload id:</string>

@@ -97,7 +97,7 @@
     <string name="network_querying">(query uitvoeren&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Wachtwurd weergeven</string>
-    <string name="setting_db_marker">DB-marker (upload sûnt):</string>
+    <string name="setting_db_marker">DB-marker (lêste opladen netwurk):</string>
     <string name="setting_high_up">Heechste upload ID:</string>
     <string name="setting_zero_out">Reset DB marker?</string>
     <string name="setting_max_id">Max upload ID:</string>

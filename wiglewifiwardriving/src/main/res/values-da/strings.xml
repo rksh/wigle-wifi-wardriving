@@ -97,7 +97,7 @@
     <string name="network_querying">(Forspøger)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Vis adgangskode</string>
-    <string name="setting_db_marker">DB-markør (upload siden):</string>
+    <string name="setting_db_marker">DB-markør (sidste uploadede netværk):</string>
     <string name="setting_high_up">Højeste uploadet id:</string>
     <string name="setting_zero_out">Nul ud DB markør?</string>
     <string name="setting_max_id">Max upload id:</string>

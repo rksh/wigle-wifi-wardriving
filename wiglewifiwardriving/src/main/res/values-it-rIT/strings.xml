@@ -97,7 +97,7 @@
     <string name="network_querying">(ricerca&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Mostra Password</string>
-    <string name="setting_db_marker">Marcatore DB (upload da):</string>
+    <string name="setting_db_marker">Marcatore DB (ultima rete caricata):</string>
     <string name="setting_high_up">Più alto ID caricato:</string>
     <string name="setting_zero_out">Azzerare il segnalibro del database?</string>
     <string name="setting_max_id">Massimo ID caricato:</string>

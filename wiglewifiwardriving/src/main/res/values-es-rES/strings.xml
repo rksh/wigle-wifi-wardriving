@@ -96,7 +96,7 @@
     <string name="network_querying">(preguntando…)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Mostrar contraseña</string>
-    <string name="setting_db_marker">Marcador de BD (desde subida):</string>
+    <string name="setting_db_marker">Marcador de BD (última red subida):</string>
     <string name="setting_high_up">Identificación más alta cargado:</string>
     <string name="setting_zero_out">¿Poner a cero el marcador de la base de datos?</string>
     <string name="setting_max_id">Identificación de carga máxima:</string>

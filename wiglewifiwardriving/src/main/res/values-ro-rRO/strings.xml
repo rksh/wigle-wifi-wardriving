@@ -97,7 +97,7 @@
     <string name="network_querying">(interogarea&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Arata parola</string>
-    <string name="setting_db_marker">Marcator BD (upload din):</string>
+    <string name="setting_db_marker">Marcator BD (ultima rețea încărcată):</string>
     <string name="setting_high_up">Cel mai mare ID încărcat:</string>
     <string name="setting_zero_out">Marker BD zero-out?</string>
     <string name="setting_max_id">Încărcare maximă id:</string>

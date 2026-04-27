@@ -96,7 +96,7 @@
     <string name="network_querying">(क्वेरी उठाना…)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">पासवर्ड दिखाएँ</string>
-    <string name="setting_db_marker">डीबी मार्कर (अपलोड-बिंदु से):</string>
+    <string name="setting_db_marker">डीबी मार्कर (अंतिम अपलोड किया गया नेटवर्क):</string>
     <string name="setting_high_up">उच्चतम अपलोड की गई ID:</string>
     <string name="setting_zero_out">ज़ीरो आउट DB मार्कर?</string>
     <string name="setting_max_id">अधिकतम अपलोड ID:</string>
