@@ -8,7 +8,7 @@ We use Android Studio to build and maintain the project. Fork and clone this rep
 
 ## LLM / AI Tools
 
-Pull requests must be submitted by humans, who have full understanding of the changins being made, and include human-written descriptions of what was done and why. Do not invent or reference code or features that do not exist.
+Pull requests must be submitted by humans, who have full understanding of the changes being made, and include human-written descriptions of what was done and why. Do not invent or reference code or features that do not exist.
 
 If any LLM / AI tools were used to assist a human in their efforts they must be disclosed in the pull request.
 
