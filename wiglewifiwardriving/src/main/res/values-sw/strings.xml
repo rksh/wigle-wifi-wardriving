@@ -96,7 +96,7 @@
     <string name="network_querying">(Kuuliza…)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Onyesha Nywila</string>
-    <string name="setting_db_marker">Alama ya DB (ambapo upakiaji unaanzia):</string>
+    <string name="setting_db_marker">Alama ya DB (mtandao wa mwisho uliopakiwa):</string>
     <string name="setting_high_up">Kitambulisho cha juu kabisa kilichopakiwa:</string>
     <string name="setting_zero_out">Punguza alama ya DB hadi Sufuri?</string>
     <string name="setting_max_id">Kiasi cha juu zaidi cha upakiaji kitambulisho</string>
@@ -491,4 +491,9 @@
     <string name="battery_opt_status_exempted">Umeondolewa</string>
     <string name="battery_opt_status_not_exempted">Haijaondolewa (gusa kubadilisha)</string>
     <string name="phone_permission_detail">WiGLE inaweza kuzima sauti ya programu unapokubali simu inayoingia kwenye kifaa chako. Ruhusa hii inaambia programu inahitaji kuacha sauti ili uweze kuongea.</string>
+    <string name="database_stats">Hifadhidata ya ndani (kwenye kifaa):</string>
+    <string name="export">Hamisha data</string>
+    <string name="backup_restore">Hifadhi rudufu na kurejesha</string>
+    <string name="flag_whole_database">Weka hifadhidata nzima kwa upakiaji</string>
+    <string name="file_size_warning">Ukubwa wa faili utazidi upeo kwa uwezekano mkubwa.</string>
 </resources>

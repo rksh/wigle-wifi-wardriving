@@ -97,7 +97,7 @@
     <string name="network_querying">(ricerca&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">Mostra Password</string>
-    <string name="setting_db_marker">Segnalibro del database (da cui inizia il caricamento):</string>
+    <string name="setting_db_marker">Marcatore DB (ultima rete caricata):</string>
     <string name="setting_high_up">Più alto ID caricato:</string>
     <string name="setting_zero_out">Azzerare il segnalibro del database?</string>
     <string name="setting_max_id">Massimo ID caricato:</string>
@@ -492,4 +492,9 @@
     <string name="battery_opt_status_exempted">Esonerato</string>
     <string name="battery_opt_status_not_exempted">Non esonerato (tocca per modificare)</string>
     <string name="phone_permission_detail">WiGLE può disattivare l\'audio dell\'app quando accetti una chiamata in arrivo sul dispositivo. Questo permesso comunica all\'app di interrompere i suoni per permetterti di parlare.</string>
+    <string name="database_stats">Database locale (sul dispositivo):</string>
+    <string name="export">Esportazione dati</string>
+    <string name="backup_restore">Backup e ripristino</string>
+    <string name="flag_whole_database">Imposta l’intero database per il caricamento</string>
+    <string name="file_size_warning">La dimensione del file probabilmente supererà il massimo.</string>
 </resources>

@@ -97,7 +97,7 @@
     <string name="network_querying">(querying&#8230;)</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">비밀 번호를 표시</string>
-    <string name="setting_db_marker">DB 마커 (여기서 업로드부터 시작) :</string>
+    <string name="setting_db_marker">DB 마커(마지막으로 업로드된 네트워크):</string>
     <string name="setting_high_up">최고 업로드 ID :</string>
     <string name="setting_zero_out">DB 마커 아웃 제로?</string>
     <string name="setting_max_id">최대 업로드 ID :</string>
@@ -492,4 +492,9 @@
     <string name="battery_opt_status_exempted">제외됨</string>
     <string name="battery_opt_status_not_exempted">제외되지 않음 (탭하여 변경)</string>
     <string name="phone_permission_detail">WiGLE은 기기에서 수신 전화를 받을 때 앱 오디오를 음소거할 수 있습니다. 이 권한은 통화할 수 있도록 앱이 소리를 재생하지 않아야 함을 알려 줍니다.</string>
+    <string name="database_stats">로컬(기기) 데이터베이스:</string>
+    <string name="export">데이터 내보내기</string>
+    <string name="backup_restore">백업 및 복원</string>
+    <string name="flag_whole_database">업로드용 전체 데이터베이스로 설정</string>
+    <string name="file_size_warning">파일 크기가 최대치를 초과할 가능성이 있습니다.</string>
 </resources>

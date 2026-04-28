@@ -97,7 +97,7 @@
     <string name="network_querying">（正查询&#8230;）</string>
     <string name="network_rcois">RCOIs:</string>
     <string name="setting_show_password">显示密码</string>
-    <string name="setting_db_marker">数据库标记（从此开始上传）：</string>
+    <string name="setting_db_marker">数据库标记（最后上传的网络）：</string>
     <string name="setting_high_up">最高上传ID：</string>
     <string name="setting_zero_out">要清零数据库的标记吗？</string>
     <string name="setting_max_id">最大上传ID：</string>
@@ -492,4 +492,9 @@
     <string name="battery_opt_status_exempted">已豁免</string>
     <string name="battery_opt_status_not_exempted">未豁免（点击更改）</string>
     <string name="phone_permission_detail">WiGLE 可在您于设备上接听来电时将应用音频静音。此权限会告知应用需要停止播放声音以便您通话。</string>
+    <string name="database_stats">本地（设备上）数据库：</string>
+    <string name="export">数据导出</string>
+    <string name="backup_restore">备份与恢复</string>
+    <string name="flag_whole_database">将整个数据库标记为上传</string>
+    <string name="file_size_warning">文件大小可能会超过上限。</string>
 </resources>
