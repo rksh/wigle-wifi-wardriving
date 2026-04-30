@@ -496,5 +496,5 @@
     <string name="export">Exportation des données</string>
     <string name="backup_restore">Sauvegarde et restauration</string>
     <string name="flag_whole_database">Marquer toute la base pour l’envoi</string>
-    <string name="file_size_warning">La taille du fichier dépassera probablement le maximum.</string>
+    <string name="file_size_warning">Plusieurs envois seront nécessaires.</string>
 </resources>

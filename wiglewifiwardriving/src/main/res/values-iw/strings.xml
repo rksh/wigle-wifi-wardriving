@@ -496,5 +496,5 @@
     <string name="export">ייצוא נתונים</string>
     <string name="backup_restore">גיבוי ושחזור</string>
     <string name="flag_whole_database">סמן את כל מסד הנתונים להעלאה</string>
-    <string name="file_size_warning">גודל הקובץ ככל הנראה יחרוג מהמקסימום.</string>
+    <string name="file_size_warning">נדרשות העלאות מרובות.</string>
 </resources>

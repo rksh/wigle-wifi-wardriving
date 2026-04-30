@@ -496,5 +496,5 @@
     <string name="export">Export dat</string>
     <string name="backup_restore">Zálohování a obnovení</string>
     <string name="flag_whole_database">Označit celou databázi k nahrání</string>
-    <string name="file_size_warning">Velikost souboru pravděpodobně překročí maximum.</string>
+    <string name="file_size_warning">Bude nutné provést několik nahrání.</string>
 </resources>

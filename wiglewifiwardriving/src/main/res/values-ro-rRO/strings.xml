@@ -496,5 +496,5 @@
     <string name="export">Export de date</string>
     <string name="backup_restore">Backup și restaurare</string>
     <string name="flag_whole_database">Marchează întreaga bază pentru încărcare</string>
-    <string name="file_size_warning">Dimensiunea fișierului va depăși probabil maximul.</string>
+    <string name="file_size_warning">Vor fi necesare mai multe încărcări.</string>
 </resources>
