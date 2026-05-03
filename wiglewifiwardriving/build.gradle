@@ -94,12 +94,27 @@ ext {
 
 def camerax_version = "1.5.2"
 
+// avoid <1.8.3 transitives for Fragment - Play Store reported crashes in 2.108
+def fragment_floor_version = "1.8.6"
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "androidx.fragment"
+                && (details.requested.name == "fragment" || details.requested.name == "fragment-ktx")) {
+            // Always align any androidx.fragment pulls to fragment_floor_version (≥ 1.8.3).
+            details.useVersion(fragment_floor_version)
+            details.because("Enforce Fragment $fragment_floor_version+ (avoid <1.8.3 transitives)")
+        }
+    }
+}
+
 dependencies {
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.legacy:legacy-support-core-utils:1.0.0"
     implementation "androidx.core:core:1.17.0"
     implementation "androidx.appcompat:appcompat:1.7.1"
+    implementation "androidx.fragment:fragment:$fragment_floor_version"
     //NB: 1.12 -  1.14.0-alpha08 are unstable - see byzantine failures in https://stackoverflow.com/questions/79128940/mysterious-accessibility-related-crash
     implementation "com.google.android.material:material:1.11.0"
     implementation "com.google.android.gms:play-services-maps:19.2.0"
