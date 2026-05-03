@@ -234,7 +234,7 @@ public final class BluetoothReceiver extends BroadcastReceiver implements LeScan
 
                 final String address = device.getAddress();
                 final int deviceType = device.getType();
-                final Integer patternAddressType = getAddressTypeFromPattern(address);
+                final Integer patternAddressType = guessLeAddressType ? getAddressTypeFromPattern(address) : null;
                 if (bleAddressType == null && guessLeAddressType) {
                     // API unavailable - use pattern detection (only for BLE devices)
                     if (patternAddressType != null) {
