@@ -496,5 +496,5 @@
     <string name="export">Dataeksport</string>
     <string name="backup_restore">Sikkerhedskopi og gendannelse</string>
     <string name="flag_whole_database">Angiv hele databasen til upload</string>
-    <string name="file_size_warning">Filstørrelsen vil sandsynligvis overstige maksimum.</string>
+    <string name="file_size_warning">Flere uploads vil være nødvendige.</string>
 </resources>

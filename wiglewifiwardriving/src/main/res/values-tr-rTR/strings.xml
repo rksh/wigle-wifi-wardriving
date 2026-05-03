@@ -496,6 +496,6 @@
     <string name="export">Veri dışa aktarma</string>
     <string name="backup_restore">Yedekleme ve geri yükleme</string>
     <string name="flag_whole_database">Yükleme için tüm veritabanını işaretle</string>
-    <string name="file_size_warning">Dosya boyutu büyük olasılıkla üst sınırı aşacaktır.</string>
+    <string name="file_size_warning">Birden fazla yükleme gerekecek.</string>
 </resources>
 

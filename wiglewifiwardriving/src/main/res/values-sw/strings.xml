@@ -495,5 +495,5 @@
     <string name="export">Hamisha data</string>
     <string name="backup_restore">Hifadhi rudufu na kurejesha</string>
     <string name="flag_whole_database">Weka hifadhidata nzima kwa upakiaji</string>
-    <string name="file_size_warning">Ukubwa wa faili utazidi upeo kwa uwezekano mkubwa.</string>
+    <string name="file_size_warning">Itahitajika kupakia mara kwa mara.</string>
 </resources>

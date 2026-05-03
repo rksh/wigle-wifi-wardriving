@@ -496,5 +496,5 @@
     <string name="export">Gegevens exporteren</string>
     <string name="backup_restore">Back-up en herstel</string>
     <string name="flag_whole_database">Gehele database markeren voor upload</string>
-    <string name="file_size_warning">Bestandsgrootte overschrijdt waarschijnlijk het maximum.</string>
+    <string name="file_size_warning">Er zijn meerdere uploads nodig.</string>
 </resources>

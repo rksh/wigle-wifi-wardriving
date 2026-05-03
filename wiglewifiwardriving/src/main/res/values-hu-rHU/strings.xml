@@ -496,5 +496,5 @@
     <string name="export">Adatexport</string>
     <string name="backup_restore">Biztonsági mentés és visszaállítás</string>
     <string name="flag_whole_database">A teljes adatbázis jelölése feltöltésre</string>
-    <string name="file_size_warning">A fájlméret valószínűleg meghaladja a maximumot.</string>
+    <string name="file_size_warning">Több feltöltésre lesz szükség.</string>
 </resources>

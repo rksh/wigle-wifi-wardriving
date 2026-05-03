@@ -495,5 +495,5 @@
     <string name="export">資料匯出</string>
     <string name="backup_restore">備份與還原</string>
     <string name="flag_whole_database">將整個資料庫設為上傳</string>
-    <string name="file_size_warning">檔案大小可能會超過上限。</string>
+    <string name="file_size_warning">需要多次上傳。</string>
 </resources>
