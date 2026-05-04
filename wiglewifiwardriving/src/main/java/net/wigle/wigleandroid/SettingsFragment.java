@@ -81,6 +81,7 @@ import org.json.JSONObject;
 import kotlin.Unit;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -808,6 +809,8 @@ public final class SettingsFragment extends Fragment implements DialogListener {
                     fossMapStyleUrlEdit.setError("required");
                 } else if (null == keyPart || keyPart.toString().isEmpty()) {
                     fossMapKeyEdit.setError("required");
+                } else if (null == HttpUrl.parse(urlPart.toString() + keyPart.toString())) {
+                    fossMapStyleUrlEdit.setError("invalid");
                 } else {
                     showProgressCenter(verify);
                     final String urlString = urlPart.toString() + keyPart.toString();
