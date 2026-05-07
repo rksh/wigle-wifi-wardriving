@@ -819,7 +819,7 @@ public final class SettingsFragment extends Fragment implements DialogListener {
                     } else {
                         final String scheme = httpUrl.scheme();
                         if (!"http".equals(scheme) && !"https".equals(scheme)) {
-                            fossMapStyleUrlEdit.setError("invalid");
+                            fossMapStyleUrlEdit.setError("invalid scheme: "+scheme);
                         } else {
                             showProgressCenter(verify);
                             final OkHttpClient checkClient = new OkHttpClient.Builder()
