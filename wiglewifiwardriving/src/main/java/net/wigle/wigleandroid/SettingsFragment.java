@@ -81,6 +81,7 @@ import org.json.JSONObject;
 import kotlin.Unit;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -804,51 +805,68 @@ public final class SettingsFragment extends Fragment implements DialogListener {
             verify.setOnClickListener(buttonView -> {
                 final Editable urlPart = fossMapStyleUrlEdit.getText();
                 final Editable keyPart = fossMapKeyEdit.getText();
-                if (null == urlPart || urlPart.toString().isEmpty()) {
+                final String urlCandidate = urlPart == null ? "" : urlPart.toString().trim();
+                final String keyCandidate = keyPart == null ? "" : keyPart.toString().trim();
+                if (urlCandidate.isEmpty()) {
                     fossMapStyleUrlEdit.setError("required");
-                } else if (null == keyPart || keyPart.toString().isEmpty()) {
+                } else if (keyCandidate.isEmpty()) {
                     fossMapKeyEdit.setError("required");
                 } else {
-                    showProgressCenter(verify);
-                    final String urlString = urlPart.toString() + keyPart.toString();
-                    OkHttpClient checkClient = new OkHttpClient.Builder()
-                            .connectTimeout(CONN_TIMEOUT_S, TimeUnit.SECONDS)
-                            .writeTimeout(WRITE_TIMEOUT_S, TimeUnit.SECONDS)
-                            .readTimeout(READ_TIMEOUT_S, TimeUnit.SECONDS).build();
-                    Request request = new Request.Builder()
-                            .url(urlString)
-                            .build();
-                    checkClient.newCall(request).enqueue(new Callback() {
-                        final Handler mainHandler = new Handler(Looper.getMainLooper());
+                    final String concat = urlCandidate + keyCandidate;
+                    final HttpUrl httpUrl = HttpUrl.parse(concat);
+                    if (httpUrl == null) {
+                        fossMapStyleUrlEdit.setError("invalid");
+                    } else {
+                        final String scheme = httpUrl.scheme();
+                        if (!"http".equals(scheme) && !"https".equals(scheme)) {
+                            fossMapStyleUrlEdit.setError("invalid scheme: "+scheme);
+                        } else {
+                            showProgressCenter(verify);
+                            final OkHttpClient checkClient = new OkHttpClient.Builder()
+                                    .connectTimeout(CONN_TIMEOUT_S, TimeUnit.SECONDS)
+                                    .writeTimeout(WRITE_TIMEOUT_S, TimeUnit.SECONDS)
+                                    .readTimeout(READ_TIMEOUT_S, TimeUnit.SECONDS).build();
+                            try {
+                                final Request request = new Request.Builder()
+                                        .url(httpUrl)
+                                        .build();
+                                checkClient.newCall(request).enqueue(new Callback() {
+                                    final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-                        @Override public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                            mainHandler.post(() -> {
-                                fossMapStyleUrlEdit.setError("required");
+                                    @Override public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                        mainHandler.post(() -> {
+                                            fossMapStyleUrlEdit.setError("required");
+                                            hideProgressCenterFail(verify);
+                                        });
+                                    }
+
+                                    @Override public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                        if (response.isSuccessful()) {
+                                            mainHandler.post(() -> hideProgressCenterSuccess(verify));
+                                        } else {
+                                            if (response.code() == 404) {
+                                                mainHandler.post(() -> {
+                                                    fossMapStyleUrlEdit.setError("required");
+                                                    hideProgressCenterFail(verify);
+                                                });
+                                            } else if (response.code() == 401 || response.code() == 403) {
+                                                mainHandler.post(() -> {
+                                                    fossMapKeyEdit.setError("required");
+                                                    hideProgressCenterFail(verify);
+                                                });
+                                            } else {
+                                                mainHandler.post(() -> hideProgressCenterFail(verify));
+                                            }
+                                        }
+                                    }
+                                });
+                            } catch (final IllegalArgumentException ex) {
+                                Logging.warn("FOSS map verify URL rejected by OkHttp: " + ex.getMessage(), ex);
+                                fossMapStyleUrlEdit.setError("invalid");
                                 hideProgressCenterFail(verify);
-                            });
-                        }
-
-                        @Override public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                            if (response.isSuccessful()) {
-                                mainHandler.post(() -> hideProgressCenterSuccess(verify));
-                            } else {
-                                if (response.code() == 404) {
-                                    mainHandler.post(() -> {
-                                        fossMapStyleUrlEdit.setError("required");
-                                        hideProgressCenterFail(verify);
-                                    });
-                                } else if (response.code() == 401 || response.code() == 403) {
-                                    mainHandler.post(() -> {
-                                        fossMapKeyEdit.setError("required");
-                                        hideProgressCenterFail(verify);
-                                    });
-                                } else {
-                                    mainHandler.post(() -> hideProgressCenterFail(verify));
-                                }
                             }
                         }
-                    });
-
+                    }
                 }
             });
 
