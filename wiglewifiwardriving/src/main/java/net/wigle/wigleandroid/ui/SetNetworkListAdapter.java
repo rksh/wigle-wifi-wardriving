@@ -264,18 +264,12 @@ public final class SetNetworkListAdapter extends AbstractListAdapter<Network> {
         if (BLE.equals(network.getType())) {
             final Integer bleAddressType = network.getBleAddressType();
             if (null != bleAddressType /*&& (bleAddressType == ADDRESS_TYPE_RANDOM || bleAddressType == ADDRESS_TYPE_ANONYMOUS)*/) {
-                final Integer img = NetworkListUtil.getBleAddrTypeImage(bleAddressType);
+                final Integer img = NetworkListUtil.getBleAddrTypeImage(bleAddressType, network.getBssid());
                 if (null != img) {
                     btRandom.setImageResource(img);
                     btRandom.setVisibility(View.VISIBLE);
                 } else {
-                    if (bleAddressType != 0) {
-                        Logging.error("null image for BLE addr type: "+bleAddressType);
-                        btRandom.setImageResource(R.drawable.groucho);
-                        btRandom.setVisibility(View.VISIBLE);
-                    } else {
-                        btRandom.setVisibility(View.GONE);
-                    }
+                    btRandom.setVisibility(View.GONE);
                 }
             } else {
                 //DEBUG: Logging.error("null/random address type: "+bleAddressType);
