@@ -27,4 +27,11 @@
     <color name="list_background">#000</color>
     <color name="list_item_match_background">#78FF0000</color>
     <color name="news_card_background_color">#333333</color>
+    <!-- encryption colors, matching the wigle.net encryption stats graph (wigle.js), same in light and dark -->
+    <color name="enc_wpa3">#00A383</color>
+    <color name="enc_wpa2">#2EA84A</color>
+    <color name="enc_wpa">#7FA000</color>
+    <color name="enc_wep">#B89200</color>
+    <color name="enc_open">#FF0000</color>
+    <color name="enc_unknown">#FFAA00</color>
 </resources>

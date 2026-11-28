@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netwpa3_title"
             android:textSize="18sp"
-            android:textColor="#00AA00"
+            android:textColor="@color/enc_wpa3"
             android:textStyle="bold"
             />
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netwpa2_title"
             android:textSize="18sp"
-            android:textColor="#00ff00"
+            android:textColor="@color/enc_wpa2"
             android:textStyle="bold"
             />
         <TextView
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netwpa_title"
             android:textSize="18sp"
-            android:textColor="#ffff00"
+            android:textColor="@color/enc_wpa"
             android:textStyle="bold"
             />
         <TextView
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netwep_title"
             android:textSize="18sp"
-            android:textColor="#ffad00"
+            android:textColor="@color/enc_wep"
             android:textStyle="bold"
             />
         <TextView
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netnowep_title"
             android:textSize="18sp"
-            android:textColor="#ff0000"
+            android:textColor="@color/enc_open"
             android:textStyle="bold"
             />
         <TextView
@@ -129,6 +129,7 @@
             android:layout_height="wrap_content"
             android:text="@string/netwepunknown_title"
             android:textSize="18sp"
+            android:textColor="@color/enc_unknown"
             android:textStyle="bold"
             />
         <TextView
